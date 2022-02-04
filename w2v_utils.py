@@ -1,13 +1,14 @@
 import numpy as np
 
-def read_glove_vecs(glovefile):
-    with open(glovefile, 'r') as f:
+def read_glove_vecs(glove_file):
+    with open(glove_file, 'r', encoding="utf-8", errors='ignore') as f:
         words = set()
-        w2v_map = {}
-
-        for line in f:
-            line.strip().split()
-            words.add(line[0])
-            w2v_map[line[0]] = np.array(line[1:], dtype=np.float64)
+        word_to_vec_map = {}
         
-    return words, w2v_map
+        for line in f:
+            line = line.strip().split()
+            curr_word = line[0]
+            words.add(curr_word)
+            word_to_vec_map[curr_word] = np.array(line[1:], dtype=np.float64)
+            
+    return words, word_to_vec_map
